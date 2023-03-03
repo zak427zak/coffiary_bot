@@ -3,14 +3,14 @@ import requests
 from tgbot.config import load_config
 
 
-def get_recipes_service(message):
+def get_recipes_service(message, is_concrete, data):
     config = load_config(".env")
     url = f"https://services.llqq.ru/coffiary/recipes"
     headers = {'Authorization': f'Bearer {config.tg_bot.server_token}'}
-    data = {"userId": message.from_user.id}
-    r = requests.post(url, headers=headers, data=data)
-    if r.status_code == 200:
-        return r.json()['result'], r.status_code
+    if is_concrete == "true":
+        data = {"userId": message.from_user.id, "isConcrete": is_concrete, "monthBlock": data.get("parent"),
+                "dayBlock": data.get("link")}
     else:
-        return r.json()['errorMessage'], r.status_code
-
+        data = {"userId": message.from_user.id, "isConcrete": is_concrete}
+    r = requests.post(url, headers=headers, data=data)
+    return r.json()

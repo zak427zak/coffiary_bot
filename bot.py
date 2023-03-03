@@ -11,6 +11,7 @@ from tgbot.handlers.add import register_add_recipe
 from tgbot.handlers.admin import register_admin
 from tgbot.handlers.echo import register_echo
 from tgbot.handlers.recipes import register_get_recipes
+from tgbot.handlers.recipes_catalog_months import register_get_recipes_months
 from tgbot.handlers.user import register_user
 from tgbot.middlewares.environment import EnvironmentMiddleware
 
@@ -28,6 +29,7 @@ def register_all_filters(dp):
 def register_all_handlers(dp):
     register_admin(dp)
     register_user(dp)
+    register_get_recipes_months(dp)
     register_get_recipes(dp)
     register_add_recipe(dp)
     register_echo(dp)

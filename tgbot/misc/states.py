@@ -7,6 +7,8 @@ class Recipe(StatesGroup):
     amount_of_coffee = State()
     coffee_type = State()
     brew_time = State()
+    grind_size = State()
     description = State()
+    grade = State()
     name = State()
     photo_url = State()

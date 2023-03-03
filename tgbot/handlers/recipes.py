@@ -5,9 +5,10 @@ from tgbot.services.get_recipes_service import get_recipes_service
 
 
 async def recipe(message: Message):
-    resp, code = get_recipes_service(message)
-    await message.answer(resp)
+    resp = get_recipes_service(message, "false", "")
+    for item in resp:
+        await message.answer_photo(photo=item['image'], caption=item['text'])
 
 
 def register_get_recipes(dp: Dispatcher):
-    dp.register_message_handler(recipe, commands=["recipes"], state="*")
+    dp.register_message_handler(recipe, commands=["unsorted_recipes"], state="*")

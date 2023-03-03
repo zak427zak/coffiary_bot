@@ -11,4 +11,4 @@ async def recipe(message: Message):
 
 
 def register_get_recipes(dp: Dispatcher):
-    dp.register_message_handler(recipe, commands=["unsorted_recipes"], state="*")
+    dp.register_message_handler(recipe, commands=["unsorted"], state="*")

@@ -31,6 +31,6 @@ async def recipes_final(call: CallbackQuery, callback_data: dict):
 
 
 def register_get_recipes_months(dp: Dispatcher):
-    dp.register_message_handler(recipes_months, commands=["sorted_recipes"], state="*")
+    dp.register_message_handler(recipes_months, commands=["sorted"], state="*")
     dp.register_callback_query_handler(recipes_days, coffiary_callback.filter(period="months"))
     dp.register_callback_query_handler(recipes_final, coffiary_callback.filter(period="days"))

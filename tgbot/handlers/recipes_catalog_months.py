@@ -9,7 +9,7 @@ from tgbot.services.get_recipes_service import get_recipes_service
 async def recipes_months(message: Message):
     new_months_keyboard = create_months_keyboard(message.from_user.id, "clear")
     await message.answer(
-        "Сгруппировали ваши рецепты по месяцам и дням, чтобы было удобнее с ними работать.\n\nВыберите месяц, в котором находится нужный вам рецепт:",
+        "Сгруппировали ваши рецепты по месяцам и дням, чтобы было удобнее с ними работать.\n\nВыберите месяц, за который хотите получить рецепты:",
         reply_markup=new_months_keyboard)
 
 

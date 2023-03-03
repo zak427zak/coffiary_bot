@@ -42,10 +42,17 @@ async def set_coffee_type(message: Message, state: FSMContext):
     await Recipe.coffee_type.set()
 
 
+async def set_description(message: Message, state: FSMContext):
+    answer = message.text
+    await state.update_data(coffee_type=answer)
+    await message.answer("Опиши впечатления:")
+    await Recipe.description.set()
+
+
 async def recipe_result(message: Message, state: FSMContext):
     answer = message.text
     now = datetime.utcnow() + timedelta(hours=3)
-    await state.update_data(coffee_type=answer)
+    await state.update_data(description=answer)
     await state.update_data(name=f"Рецепт от {now.strftime('%d.%m.%Y в %H:%M')}")
     await state.update_data(photo_url="/aaad")
     data = await state.get_data()
@@ -63,4 +70,5 @@ def register_add_recipe(dp: Dispatcher):
     dp.register_message_handler(set_water_temperature, state=Recipe.amount_of_coffee)
     dp.register_message_handler(set_brew_time, state=Recipe.water_temperature)
     dp.register_message_handler(set_coffee_type, state=Recipe.brew_time)
-    dp.register_message_handler(recipe_result, state=Recipe.coffee_type)
+    dp.register_message_handler(set_description, state=Recipe.coffee_type)
+    dp.register_message_handler(recipe_result, state=Recipe.description)

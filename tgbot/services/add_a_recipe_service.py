@@ -12,6 +12,7 @@ def add_a_recipe_service(message, recipe):
             "amountOfCoffee": str(recipe.get('amount_of_coffee')),
             "brewTime": str(recipe.get('brew_time')),
             "coffeeType": str(recipe.get('coffee_type')),
+            "description": str(recipe.get('description')),
             "name": str(recipe.get('name')), "photoUrl": str(recipe.get('photo_url'))}
     r = requests.post(url, headers=headers, data=data)
     if r.status_code == 200:

@@ -10,28 +10,28 @@ from tgbot.services.add_a_recipe_service import add_a_recipe_service
 
 async def set_water(message: Message):
     await message.answer(
-        "Введи объем воды:")
+        "Введи объем воды, число в миллилитрах:")
     await Recipe.water_volume.set()
 
 
 async def set_coffee(message: Message, state: FSMContext):
     answer = message.text
     await state.update_data(water_volume=answer)
-    await message.answer("Введи количество кофе:")
+    await message.answer("Введи количество кофе, число в граммах:")
     await Recipe.amount_of_coffee.set()
 
 
 async def set_water_temperature(message: Message, state: FSMContext):
     answer = message.text
     await state.update_data(amount_of_coffee=answer)
-    await message.answer("Введи температуру воды:")
+    await message.answer("Введи температуру воды, число в градусах Цельсия:")
     await Recipe.water_temperature.set()
 
 
 async def set_brew_time(message: Message, state: FSMContext):
     answer = message.text
     await state.update_data(water_temperature=answer)
-    await message.answer("Введи общее время заваривания:")
+    await message.answer("Введи общее время заваривания, число в секундах:")
     await Recipe.brew_time.set()
 
 

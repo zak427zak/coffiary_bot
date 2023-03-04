@@ -9,7 +9,7 @@ def get_recipes_service(message, is_concrete, data):
     headers = {'Authorization': f'Bearer {config.tg_bot.server_token}'}
     if is_concrete == "true":
         data = {"userId": message.from_user.id, "isConcrete": is_concrete, "monthBlock": data.get("parent"),
-                "dayBlock": data.get("link")}
+                "dayBlock": data.get("link"), "id": data.get("id")}
     else:
         data = {"userId": message.from_user.id, "isConcrete": is_concrete}
     r = requests.post(url, headers=headers, data=data)

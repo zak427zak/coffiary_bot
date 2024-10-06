@@ -1,3 +1,5 @@
+import logging
+
 from aiogram import Dispatcher
 from aiogram.types import Message, CallbackQuery
 
@@ -17,16 +19,28 @@ async def recipes_days(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
     link = callback_data.get("link")
     new_months_keyboard = create_months_keyboard(call.from_user.id, link, 2)
-    await call.message.answer(
-        "Теперь выберите день, за который хотите получить рецепты:",
+    await call.message.answer("Теперь выберите день, за который хотите получить рецепты:",
         reply_markup=new_months_keyboard)
 
 
 async def recipes_final(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
+
+    # Логируем входящий callback_data
+    # logging.info(f"Callback data received: {callback_data}")
+
     current_data = callback_data
     resp = get_recipes_service(call, "true", current_data)
+
+    # Логируем полученный ответ от get_recipes_service
+    # logging.info(f"Response from get_recipes_service: {resp}")
+
+    if not resp:
+        logging.warning("No recipes found or response is None.")
+
+    # Отправляем рецепты в Telegram
     for item in resp:
+        # logging.info(f"Sending recipe photo: {item['image']} with caption: {item['text']}")
         await call.message.answer_photo(photo=item['image'], caption=item['text'])
 
 

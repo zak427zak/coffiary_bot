@@ -78,9 +78,11 @@ async def recipe_result(message: Message, state: FSMContext):
     await state.update_data(photo_url=answer)
     await state.update_data(name=f"Рецепт от {now.strftime('%d.%m.%Y в %H:%M')}")
     data = await state.get_data()
-    print(data)
     resp, code = add_a_recipe_service(message, data)
-    await message.answer(resp)
+
+    # Отправляем только значение по ключу 'result'
+    await message.answer(resp['result'])
+
     if code != 200:
         await state.reset_state(with_data=False)
     else:

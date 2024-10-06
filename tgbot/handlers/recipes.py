@@ -17,8 +17,12 @@ async def recipes_final(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
     current_data = callback_data
     resp = get_recipes_service(call, "true", current_data)
-    for item in resp:
-        await call.message.answer_photo(photo=item['image'], caption=item['text'])
+
+    if resp:
+        for item in resp:
+            await call.message.answer_photo(photo=item['image'], caption=item['text'])
+    else:
+        await call.message.answer("Произошла ошибка при получении рецептов. Пожалуйста, попробуйте позже.")
 
 
 def register_get_recipes(dp: Dispatcher):

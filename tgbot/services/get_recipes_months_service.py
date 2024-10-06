@@ -1,15 +1,23 @@
 import requests
 
-from tgbot.config import load_config
-
 
 def get_recipes_months_service(user_id, keyboard_type):
-    config = load_config(".env")
-    url = f"https://services.llqq.ru/coffiary/recipes/catalog"
-    headers = {'Authorization': f'Bearer {config.tg_bot.server_token}'}
+    url = "http://api:8000/recipes/catalog"
+    headers = {
+        'Content-Type': 'application/json'
+    }
     data = {"userId": user_id, "keyboardType": keyboard_type}
-    r = requests.post(url, headers=headers, data=data)
-    if r.status_code == 200:
+
+    try:
+        r = requests.post(url, headers=headers, json=data)
+        r.raise_for_status()
         return r.json()
-    else:
-        return r.json()
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err} - {r.text}")
+    except requests.exceptions.RequestException as err:
+        print(f"Error occurred: {err}")
+    except ValueError as json_err:
+        print(f"JSON decode error: {json_err} - Response content: {r.text}")
+
+
+    return []

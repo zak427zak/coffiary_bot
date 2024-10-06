@@ -15,7 +15,7 @@ services:
     env_file:
       - ".env"
     ports:
-      - "8081:80"  # Открываем порт 8081 для бота
+      - "8085:80"  # Открываем порт 8081 для бота
     logging:
       driver: "json-file"
       options:

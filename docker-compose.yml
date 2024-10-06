@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  bot:
+  coffiary_tg_bot:
     image: "bot"
     build:
       context: .
@@ -24,7 +24,7 @@ services:
     depends_on:
       - mysql  # Указываем зависимость от MySQL
 
-  api:
+  coffiary_api:
     image: "api"
     build:
       context: ./infrastructure/api
@@ -52,7 +52,7 @@ services:
       - mysql
 
 
-  mysql:
+  coffiary_mysql:
     image: "mysql:8.0"
     env_file:
       - ".env"

@@ -4,7 +4,7 @@ import requests
 
 
 def add_a_recipe_service(message, recipe):
-    url = "http://api:8000/recipe"
+    url = "http://coffiary_api:8000/recipe"
     headers = {'Content-Type': 'application/json'}
     data = {"userId": message.from_user.id, "waterVolume": str(recipe.get('water_volume')),
             "waterTemperature": str(recipe.get('water_temperature')),

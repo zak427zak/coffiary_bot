@@ -4,7 +4,7 @@ import requests
 
 
 def get_recipes_service(message, is_concrete, data):
-    url = "http://api:8000/recipes"
+    url = "http://coffiary_api:8000/recipes"
     headers = {
         'Content-Type': 'application/json'
     }

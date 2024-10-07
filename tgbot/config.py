@@ -9,7 +9,7 @@ class DbConfig:
     password: str
     user: str
     database: str
-    port: int = 3306
+    port: int
 
     # For SQLAlchemy
     def construct_sqlalchemy_url(self, driver="pymysql", host=None, port=None) -> str:
@@ -38,11 +38,11 @@ class DbConfig:
         """
         Creates the DbConfig object from environment variables.
         """
-        host = env.str("DB_HOST")
+        host = env.str("MYSQL_HOST")
         password = env.str("MYSQL_PASSWORD")  # измените на переменную окружения для пароля MySQL
         user = env.str("MYSQL_USER")  # измените на переменную окружения для пользователя MySQL
         database = env.str("MYSQL_DATABASE")  # измените на переменную окружения для базы данных MySQL
-        port = env.int("DB_PORT", 3306)  # измените порт на стандартный порт MySQL
+        port = env.int("MYSQL_PORT")  # измените порт на стандартный порт MySQL
         return DbConfig(
             host=host, password=password, user=user, database=database, port=port
         )
@@ -83,7 +83,8 @@ def load_config(path: str = None):
             host=env.str('MYSQL_HOST'),
             password=env.str('MYSQL_PASSWORD'),
             user=env.str('MYSQL_USER'),
-            database=env.str('MYSQL_DATABASE')
+            database=env.str('MYSQL_DATABASE'),
+            port=env.int('MYSQL_PORT'),
         ),
         misc=Miscellaneous()
     )

@@ -2,7 +2,7 @@ import requests
 
 
 def get_recipes_months_service(user_id, keyboard_type):
-    url = "http://api:8000/recipes/catalog"
+    url = "http://coffiary_api:8000/recipes/catalog"
     headers = {
         'Content-Type': 'application/json'
     }

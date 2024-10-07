@@ -4,7 +4,7 @@ import requests
 
 
 def register_new_user(message):
-    url = "http://api:8000/user/register"
+    url = "http://coffiary_api:8000/user/register"
     headers = {
         'Content-Type': 'application/json'
     }

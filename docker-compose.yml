@@ -22,7 +22,7 @@ services:
         max-size: "200k"
         max-file: "10"
     depends_on:
-      - mysql  # Указываем зависимость от MySQL
+      - coffiary_mysql  # Указываем зависимость от MySQL
 
   coffiary_api:
     image: "api"
@@ -49,7 +49,7 @@ services:
         max-size: "200k"
         max-file: "10"
     depends_on:
-      - mysql
+      - coffiary_mysql
 
 
   coffiary_mysql:
@@ -61,6 +61,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql  # Сохраняем данные MySQL на локальном хосте
       - ./my.cnf:/etc/mysql/conf.d/my.cnf  # Добавляем кастомную конфигурацию
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     deploy:
       restart_policy:
         condition: any

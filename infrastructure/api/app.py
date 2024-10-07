@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.DEBUG,  # Уровень логировани�
 
 # Настройка базы данных из переменных окружения
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL',
-                                                  'mysql+pymysql://coffiary_adm:ujHoHGj5Zel4reP273dJAg@mysql:3306/coffiary')
+                                                  'mysql+pymysql://coffiary_adm:ujHoHGj5Zel4reP273dJAg@coffiary_mysql:3306/coffiary')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Инициализируем базу данных с приложением
@@ -121,8 +121,6 @@ def coffiary_add_new_recipe():
 
 @app.route('/recipes', methods=['POST'])
 def coffiary_recipes():
-    print('4444')
-
     payload = request.get_json() or request.form
     # logging.info(f"Received payload: {payload}")
 

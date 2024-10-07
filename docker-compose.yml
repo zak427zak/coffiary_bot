@@ -15,27 +15,23 @@ services:
     env_file:
       - ".env"
     ports:
-      - "8085:80"  # Открываем порт 8081 для бота
+      - "8085:80"
     logging:
       driver: "json-file"
       options:
         max-size: "200k"
         max-file: "10"
     depends_on:
-      - coffiary_mysql  # Указываем зависимость от MySQL
+      - coffiary_mysql
 
   coffiary_api:
     image: "api"
     build:
       context: ./infrastructure/api
-    #working_dir: "/usr/src/app/infrastructure/api"
     working_dir: "/usr/src/app/api"
     volumes:
       - .:/usr/src/app/api
-#    volumes:
-#      - ./infrastructure:/usr/src/app/infrastructure
     command: ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "infrastructure.api.app:app"]
-    #command: python3 app.py
     deploy:
       restart_policy:
         condition: any
@@ -57,11 +53,11 @@ services:
     env_file:
       - ".env"
     ports:
-      - "3306:3306"  # Открываем порт 3306 для MySQL
+      - "3308:3306"
     volumes:
-      - mysql_data:/var/lib/mysql  # Сохраняем данные MySQL на локальном хосте
-      - ./my.cnf:/etc/mysql/conf.d/my.cnf  # Добавляем кастомную конфигурацию
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+      - ./db_conf.cnf:/etc/mysql/conf.d/db_conf.cnf
+      - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql
     deploy:
       restart_policy:
         condition: any

@@ -136,7 +136,7 @@ def coffiary_recipes():
         # Если рецепты найдены
         if recipes:
             # Преобразуем их в необходимый формат
-            data = recipe_repo.to_collection_reciklomats(recipes, 1, 999, current_user)
+            data = recipe_repo.to_collection_recipes(recipes, 1, 999, current_user)
             # logging.info(f"Transformed data: {data}")
             return jsonify(data)
 

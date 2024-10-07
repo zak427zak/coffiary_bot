@@ -52,7 +52,7 @@ class RecipeRepo(BaseRepo):
 
         return recipes
 
-    def to_collection_reciklomats(self, recipes_list, page, per_page, current_user):
+    def to_collection_recipes(self, recipes_list, page, per_page, current_user):
         """
         Конвертирует результат запроса в список словарей.
         :param recipes_list: Список рецептов

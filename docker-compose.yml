@@ -61,6 +61,7 @@ services:
     deploy:
       restart_policy:
         condition: any
+    command: [ "/bin/sh", "-c", "chmod 644 /etc/mysql/conf.d/db_conf.cnf && chown mysql:mysql /etc/mysql/conf.d/db_conf.cnf && docker-entrypoint.sh mysqld" ]
 
 volumes:
   mysql_data:

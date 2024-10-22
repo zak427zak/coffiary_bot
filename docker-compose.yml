@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  coffiary_tg_bot:
-    image: "bot"
+  coffiary_bot:
+    image: "coffiary_bot"
     build:
       context: .
     working_dir: "/usr/src/app/bot"
@@ -25,7 +25,7 @@ services:
       - coffiary_mysql
 
   coffiary_api:
-    image: "api"
+    image: "coffiary_api"
     build:
       context: ./infrastructure/api
     working_dir: "/usr/src/app/api"

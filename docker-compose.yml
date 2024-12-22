@@ -19,8 +19,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "200k"
-        max-file: "10"
+        max-size: "20m"
+        max-file: "5"
     depends_on:
       - coffiary_mysql
 
@@ -42,8 +42,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "200k"
-        max-file: "10"
+        max-size: "20m"
+        max-file: "5"
     depends_on:
       - coffiary_mysql
 
@@ -58,6 +58,11 @@ services:
       - mysql_data:/var/lib/mysql
       - ./db_conf.cnf:/etc/mysql/conf.d/db_conf.cnf
       - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
     deploy:
       restart_policy:
         condition: any
